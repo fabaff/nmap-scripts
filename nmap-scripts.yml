@@ -16,20 +16,20 @@
     # Development librarieres from nmap which are not part of the official release
     - libs: [tls.lua]
     # Additional scripts
-    - nse: []
+    - nse: [http-fsl-tb]
     # Additional external scripts (incl. the full URL)
     - nse-external: []
 
   tasks:
   - name: download nmap libraries from nmap
     get_url: url=https://svn.nmap.org/nmap/nselib/{{ item }}
-             dest=/usr/share/nmap/nselib/{{ item }}
+             dest=/usr/share/nmap/nselib/
              mode=0644
     with_items: libs
 
   - name: copy the nmap scripts
     copy: src={{ item }}
-          dest=/usr/share/nmap/scripts/
+          dest=/usr/share/nmap/scripts/{{ item }}
           mode=0644
     with_items: nse
 
