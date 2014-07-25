@@ -35,10 +35,7 @@ action = function(host, port)
   if (response.status == 200) then
     local title = string.match(response.body, "<[Tt][Ii][Tt][Ll][Ee][^>]*>([^<]*)</[Tt][Ii][Tt][Ll][Ee]>")
     if string.find(title, "Fedora Security Lab Test bench") then
-      result = "Fedora Security Lab Test bench Web interface FOUND."
-    else
-      result = "Fedora Security Lab Test bench Web interface NOT found."
+      return "Fedora Security Lab Test bench Web interface FOUND."
     end
   end
-  return result
 end
