@@ -25,18 +25,20 @@ categories = {"discovery", "safe"}
 --   + initial release
 -- 2014-02-22 Fabian Affolter <fabian@affolter-engineering.ch>:
 --   + update @usage
+-- 2014-07-25 Fabian Affolter <fabian@affolter-engineering.ch>:
+--   + check the response status
 
 portrule = shortport.http
 
 action = function(host, port)
-    local resp, title
-    resp = http.get( host, port, '/' )
-    title = string.match(resp.body, "<[Tt][Ii][Tt][Ll][Ee][^>]*>([^<]*)</[Tt][Ii][Tt][Ll][Ee]>")
+  local response = http.get( host, port, '/' )
+  if (response.status == 200) then
+    local title = string.match(response.body, "<[Tt][Ii][Tt][Ll][Ee][^>]*>([^<]*)</[Tt][Ii][Tt][Ll][Ee]>")
     if string.find(title, "Fedora Security Lab Test bench") then
-        title = "Fedora Security Lab Test bench Web interface FOUND."
-	else
-        title = "Fedora Security Lab Test bench Web interface NOT found."
+      result = "Fedora Security Lab Test bench Web interface FOUND."
+    else
+      result = "Fedora Security Lab Test bench Web interface NOT found."
     end
-
-    return title
+  end
+  return result
 end
