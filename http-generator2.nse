@@ -4,7 +4,8 @@ local stdnse = require "stdnse"
 local string = require "string"
 
 description = [[
-Displays the contents of the "generator" meta tag of a web page (default: /) if there is one.
+Displays the contents of the "generator" meta tag of a web page (default: /) 
+if there is one.
 ]]
 
 author = "Michael Kohl"
@@ -27,29 +28,25 @@ categories = {"default", "discovery", "safe"}
 
 -- Changelog:
 -- 2011-12-23 Michael Kohl <citizen428@gmail.com>:
---   + Initial version
+--  + Initial version
 -- 2012-01-10 Michael Kohl <citizen428@gmail.com>:
---   + update documentation
---   + make pattern case insensitive
---   + only follow first redirect
+--  + update documentation
+--  + make pattern case insensitive
+--  + only follow first redirect
 -- 2012-01-11 Michael Kohl <citizen428@gmail.com>:
---   + more generic pattern
---   + simplified matching
+--  + more generic pattern
+--  + simplified matching
 -- 2012-01-13 Michael Kohl <citizen428@gmail.com>:
---   + add http-generator.path argument
---   + add http-generator.redirects argument
---   + restructure redirect handling
---   + improve redirect pattern
---   + update documentation
---   + add changelog
--- 2014-02-15 Fabian Affolter <fabian@affolter-engineering.ch>:
---   + update generator pattern
+--  + add http-generator.path argument
+--  + add http-generator.redirects argument
+--  + restructure redirect handling
+--  + improve redirect pattern
+--  + update documentation
+--  + add changelog
+-- 2014-07-29 Fabian Affolter <fabian@affolter-engineering.ch>:
+--  + update generator pattern
 
--- TODO:
--- more generic generator pattern
-
-
--- helper function
+-- Helper function
 local follow_redirects = function(host, port, path, n)
   local pattern = "^[hH][tT][tT][pP]/1.[01] 30[12]"
   local response = http.get(host, port, path)
